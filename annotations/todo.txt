@@ -1,0 +1,6 @@
+  TODO
+--------
+1- Crear tablero
+2- Calcular posiciones para movimiento
+3- Implementar movimiento
+4- Comprobar posición para fin de la partida
