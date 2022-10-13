@@ -9,6 +9,18 @@ table {
     font-size: 2em;
 }
 
+.cell-1 {
+    color: navy;
+}
+
+.cell-O {
+    color: gold;
+}
+
+.cell-A {
+    color: crimson;
+}
+
 button {
     height:5em;
     width:5em;
