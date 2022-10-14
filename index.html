@@ -7,15 +7,17 @@
     </head>
     <body>
         <h1 id="title"><u>Pac-man</u></h1>
+        <p id="message"></p>
         <div>
-            <button id="btUp" type="button">&uarr;</button>
+            <button class="buttons" id="btUp" type="button" accesskey="w">&uarr;</button>
         </div>
         <br/>
         <div>
-            <button id="btLeft" type="button">&larr;</button>
-            <button id="btDown" type="button">&darr;</button>
-            <button id="btRight" type="button">&rarr;</button>
+            <button class="buttons" id="btLeft" type="button" accesskey="a">&larr;</button>
+            <button class="buttons" id="btDown" type="button" accesskey="s">&darr;</button>
+            <button class="buttons" id="btRight" type="button" accesskey="d">&rarr;</button>
         </div>
+        <p id="btRestart"></p>
         <script src="js/map.js"></script>
         <script src="js/game.js"></script>
         <script src="js/index.js"></script>

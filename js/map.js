@@ -11,13 +11,13 @@ nsMap = {
                 ["X", "X", "1", "1", "X", "X", "X", "X", "X", "X", "X", "1", "1", "X", "X"],
                 ["X", "X", "1", "X", "X", "X", "X", "1", "X", "X", "X", "X", "1", "X", "X"],
                 ["X", "X", "X", "X", "X", "X", "1", "1", "1", "X", "X", "X", "X", "X", "X"],
-                ["X", "X", "X", "X", "X", "1", "1", "1", "1", "1", "1", "X", "X", "X", "X"]
+                ["X", "X", "X", "X", "X", "1", "1", "1", "1", "1", "X", "X", "X", "X", "X"]
             ];
 
             this.placeCharacters(map);
             this.drawMap(map);
 
-            this.buttonUp(map);
+            return map;
         }
 
         /**
@@ -62,24 +62,6 @@ nsMap = {
                 }
             }
             document.getElementById("title").appendChild(table);
-        }
-
-        buttonUp(map) {
-            document.getElementById("btUp").onclick = () => {
-                document.getElementById("map").remove();
-                for (let i = 0; i < map.length; i++) {
-                    for (let j = 0; j < map[i].length; j++) {
-                        if(map[i][j] == "O") {
-                            if (i > 0 && map[i-1][j] != "1") {
-                                map[i][j] = "X";
-                                map[i-1][j] = "O";
-                                this.drawMap(map);
-                                console.log("hola");
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        }   
     }
 }
