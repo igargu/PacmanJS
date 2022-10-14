@@ -15,7 +15,9 @@ nsMap = {
             ];
 
             this.placeCharacters(map);
-            this.drawmap(map);
+            this.drawMap(map);
+
+            this.buttonUp(map);
         }
 
         /**
@@ -45,7 +47,7 @@ nsMap = {
          * 
          * @param {array} map Mapa de juego
          */
-        drawmap(map) {
+        drawMap(map) {
             let table = document.createElement("table");
             table.setAttribute("id", "map");
             table.setAttribute("id", "map");
@@ -60,6 +62,24 @@ nsMap = {
                 }
             }
             document.getElementById("title").appendChild(table);
+        }
+
+        buttonUp(map) {
+            document.getElementById("btUp").onclick = () => {
+                document.getElementById("map").remove();
+                for (let i = 0; i < map.length; i++) {
+                    for (let j = 0; j < map[i].length; j++) {
+                        if(map[i][j] == "O") {
+                            if (i > 0 && map[i-1][j] != "1") {
+                                map[i][j] = "X";
+                                map[i-1][j] = "O";
+                                this.drawMap(map);
+                                console.log("hola");
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
