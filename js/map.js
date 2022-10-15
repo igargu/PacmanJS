@@ -21,19 +21,20 @@ nsMap = {
         }
 
         /**
-         * Método que coloca los personajes en el mapa en posiciones aleatorias
+         * Método que coloca los personajes en el mapa 
+         * en posiciones aleatorias
          * 
          * @param {array} map Mapa de juego
          */
         placeCharacters(map) {
-            for (let i = 0; i < 2; i++) {
+            for(let i = 0; i < 2; i++) {
                 let positionX, positionY, character;
                 do {
                     positionX = Math.floor(Math.random() * map.length);
                     positionY = Math.floor(Math.random() * map[0].length);    
                     character = map[positionX][positionY];
                 } while (character != "X");
-                if (i == 0) {
+                if(i == 0) {
                     map[positionX][positionY] = "O";
                 } else {
                     map[positionX][positionY] = "A";
@@ -51,9 +52,9 @@ nsMap = {
             let table = document.createElement("table");
             table.setAttribute("id", "map");
             table.setAttribute("id", "map");
-            for (let i = 0; i < map.length; i++) {
+            for(let i = 0; i < map.length; i++) {
                 let tr = document.createElement("tr");
-                for (let j = 0; j < map[i].length; j++) {
+                for(let j = 0; j < map[i].length; j++) {
                     let th = document.createElement("th");
                     th.setAttribute("class", "cell-"+map[i][j]);
                     tr.appendChild(th);
