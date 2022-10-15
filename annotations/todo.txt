@@ -2,6 +2,8 @@
 --------
 1- Crear mapa ✓
 2- Colocar personajes en el mapa de manera aleatoria ✓
-3- Calcular posiciones para movimiento
-4- Implementar movimiento
-5- Comprobar posición para fin de la partida
+3- Calcular posiciones para movimiento ✓
+4- Implementar movimiento ✓
+5- Comprobar posición para fin de la partida ✓
+6- Implementar movimiento asíncrono del enemigo ✓
+7- Implementar segunda dimensión del mapa
