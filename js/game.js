@@ -160,9 +160,9 @@ nsGame = {
                     }
                 }
                 map[newPositionX][newPositionY] = character;
-                let balls = "Remaining gems: " + this.countBalls(maps);
-                document.getElementById("balls").innerHTML = balls;
-                if (this.countBalls(maps) == '0') {
+                let balls = "Remaining gems: " + this.countGems(maps);
+                document.getElementById("gems").innerHTML = balls;
+                if (this.countGems(maps) == '0') {
                     this.finishGame("HAS GANADO");
                     clearInterval(this.interval);
                 }
@@ -194,6 +194,14 @@ nsGame = {
             }, 500);
         }
 
+        /**
+         * Método que cambia el mapa que se juega
+         * 
+         * @param {array} maps Mapas del juego
+         * @param {array} map Mapa que se juega actualmente
+         * @param {int} numMap Número del mapa que se juega actualmente
+         * @returns Nuevo mapa que se va a jugar
+         */
         changeMap(maps, map, numMap) {            
             clearInterval(this.interval);
             document.getElementById("map").remove();
@@ -202,18 +210,25 @@ nsGame = {
             return map;
         }
 
-        countBalls(maps) {
-            let numBalls = 0;
+        /**
+         * Método que devuelve el número de gemas 
+         * que quedan en el mapa
+         * 
+         * @param {array} maps Mapas del juego
+         * @returns Número de gemas restante en el mapa
+         */
+        countGems(maps) {
+            let numGems = 0;
             for(let i = 0; i < maps.length; i++) {
                 for(let j = 0; j < maps[i].length; j++) {
                     for(let k = 0; k < maps[i][j].length; k++) {
                         if(maps[i][j][k] == "X") {
-                            numBalls++;
+                            numGems++;
                         }   
                     }
                 }
             }
-            return numBalls;
+            return numGems;
         }
     }
 }
