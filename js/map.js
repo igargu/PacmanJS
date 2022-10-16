@@ -47,7 +47,7 @@ nsMap = {
                     table.appendChild(tr);
                 }
             }
-            document.getElementById("balls").appendChild(table);
+            document.getElementById("gems").appendChild(table);
         }   
     }
 }
