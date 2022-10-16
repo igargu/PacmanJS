@@ -8,15 +8,17 @@ nsGame = {
         constructor() {
             this.map = new nsMap.Map;
             this.interval = null;
+            this.isGameFinished = false;
         }
 
         /**
          * Método que inicia el juego
          */
         startGame() {
-            const map = this.map.generateMap();
+            const maps = this.map.generateMap();
+            var map = maps[0];
+            var numMap = 0;
 
-            let isGameStart = false;
             let button = document.createElement("button");
             button.setAttribute("id", "btStart");
             button.appendChild(document.createTextNode("INICIAR PARTIDA"));
@@ -24,31 +26,48 @@ nsGame = {
             button.onclick = () => {
                 document.getElementById("btStart").setAttribute("hidden", "hidden");
 
-                document.getElementById("btUp").onclick = () => { this.movements(map, "O", "A", 0) }
-                document.getElementById("btLeft").onclick = () => { this.movements(map, "O", "A", 1) }
-                document.getElementById("btRight").onclick = () => { this.movements(map, "O", "A", 2) }
-                document.getElementById("btDown").onclick = () => { this.movements(map, "O", "A", 3) }
+                document.addEventListener("keydown", (event) => {
+                    if (!this.isGameFinished) {
+                        switch(event.key) {
+                        case "w":
+                            this.movements(maps, map, "O", "A", 0)
+                            break;
+                        case "a":
+                            this.movements(maps, map, "O", "A", 1)
+                            break;
+                        case "d":
+                            this.movements(maps, map, "O", "A", 2)
+                            break;
+                        case "s":
+                            this.movements(maps, map, "O", "A", 3)
+                            break;
+                        case "Enter":
+                            if(map[map.length-1][map[0].length-1] == "O") {
+                                if (numMap == 0) {
+                                    numMap = 1;
+                                } else {
+                                    numMap = 0;
+                                }
+                                map = this.changeMap(maps, map, numMap);
+                                this.enemyMovements(maps, map);
+                            }
+                            break;
+                        }
+                    }
+                });
 
-                this.enemyMovements(map);
-            }
-
-            if (isGameStart) {
-                
+                this.enemyMovements(maps, map);
             }
         }
 
         /**
          * Método que finaliza el juego
          */
-        finishGame() {
-            document.getElementById("btUp").onclick = null;
-            document.getElementById("btLeft").onclick = null;
-            document.getElementById("btRight").onclick = null;
-            document.getElementById("btDown").onclick = null;
+        finishGame(msg) {
+            this.isGameFinished = true;
 
             let message = document.getElementById("message");
-            message.appendChild(document.createTextNode("FIN DE LA PARTIDA"));
-
+            message.appendChild(document.createTextNode("FIN DE LA PARTIDA: " + msg));
             document.getElementById("message").appendChild(document.createElement("br"));
 
             let button = document.createElement("button");
@@ -89,7 +108,7 @@ nsGame = {
          * @param {*} enemy Enemigo del personaje que vamos a mover
          * @param {*} movement Movimiento que queremos realizar
          */
-        movements(map, character, enemy, movement) {
+        movements(maps, map, character, enemy, movement) {
             const positions = this.foundCharacterPosition(map, character);
             let positionX = positions[0];
             let positionY = positions[1];
@@ -126,17 +145,38 @@ nsGame = {
                 }
             }
 
-            if(position < maxPosition && map[newPositionX][newPositionY] == "X") {
+            if(position < maxPosition && ( map[newPositionX][newPositionY] == "X" 
+                || map[newPositionX][newPositionY] == "S" || map[newPositionX][newPositionY] == "G" )) {
                 document.getElementById("map").remove();
-                map[positionX][positionY] = "X";
+                if(map[map.length-1][map[0].length-1] == "O" && character == "O") {
+                    map[positionX][positionY] = "S";
+                } else if(character == "O") {
+                    map[positionX][positionY] = "G";
+                } else if(character == "A") {
+                    if (map[newPositionX][newPositionY] == "X") {
+                        map[positionX][positionY] = "X";
+                    } else {
+                        map[positionX][positionY] = "G";
+                    }
+                }
                 map[newPositionX][newPositionY] = character;
+                let balls = "Remaining gems: " + this.countBalls(maps);
+                document.getElementById("balls").innerHTML = balls;
+                if (this.countBalls(maps) == '0') {
+                    this.finishGame("HAS GANADO");
+                    clearInterval(this.interval);
+                }
                 this.map.drawMap(map);
             } else if(position < maxPosition && map[newPositionX][newPositionY] == enemy) {
                 document.getElementById("map").remove();
-                map[positionX][positionY] = "X";
                 if(character == "A"){ map[newPositionX][newPositionY] = character }
+                if (map[newPositionX][newPositionY] == "X") {
+                    map[positionX][positionY] = "X";
+                } else {
+                    map[positionX][positionY] = "G";
+                }
                 this.map.drawMap(map);
-                this.finishGame();
+                this.finishGame("HAS PERDIDO");
                 clearInterval(this.interval);
             }
         }
@@ -147,11 +187,33 @@ nsGame = {
          * 
          * @param {array} map Mapa del juego
          */
-        enemyMovements(map) {
+        enemyMovements(maps, map) {
             this.interval = setInterval(() => {
                 let move = Math.floor(Math.random() * 4);
-                this.movements(map, "A", "O", move);
+                this.movements(maps, map, "A", "O", move);
             }, 500);
+        }
+
+        changeMap(maps, map, numMap) {            
+            clearInterval(this.interval);
+            document.getElementById("map").remove();
+            map = maps[numMap];
+            this.map.drawMap(map);
+            return map;
+        }
+
+        countBalls(maps) {
+            let numBalls = 0;
+            for(let i = 0; i < maps.length; i++) {
+                for(let j = 0; j < maps[i].length; j++) {
+                    for(let k = 0; k < maps[i][j].length; k++) {
+                        if(maps[i][j][k] == "X") {
+                            numBalls++;
+                        }   
+                    }
+                }
+            }
+            return numBalls;
         }
     }
 }

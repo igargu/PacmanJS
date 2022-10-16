@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "PacmanFont";
+    src: url("../font/pacmanfont.ttf") format('truetype');
+}
+
 body {
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
@@ -6,16 +11,22 @@ body {
 table {
     margin-left: auto;
     margin-right: auto;
+    font-family: 'PacmanFont';
     font-size: 2em;
-    background-color: dimgray;
-    border: 5px solid black;
+    background-color: black;
+    border: 5px solid navy;
 }
 
-/*.cell-X {
-    color: dimgray;
-}*/
+.cell-G {
+    color: black;
+}
 
-.cell-1 {
+.cell-X {
+    color: wheat;
+}
+
+.cell-1, .cell-2, .cell-3, .cell-4, 
+.cell-5, .cell-6, .cell-7 {
     color: navy;
 }
 
@@ -27,8 +38,17 @@ table {
     color: crimson;
 }
 
-#btUp, #btLeft, #btRight, #btDown {
+.cell-S {
+    color: mediumvioletred;
+}
+
+#btUp, #btLeft, #btRight, #btDown, #btPortal {
     height:5em;
     width:5em;
     font-size: 1.5em;
+}
+
+.customeFont {
+    font-family: 'PacmanFont';
+    font-size: 2.5em;
 }

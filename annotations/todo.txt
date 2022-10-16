@@ -6,4 +6,7 @@
 4- Implementar movimiento ✓
 5- Comprobar posición para fin de la partida ✓
 6- Implementar movimiento asíncrono del enemigo ✓
-7- Implementar segunda dimensión del mapa
+7- Implementar segunda dimensión del mapa ✓
+8- Cambiar diseño del programa ✓
+9- Cambiar control del juego ✓
+10- Implementar método de victoria ✓

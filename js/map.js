@@ -6,40 +6,25 @@ nsMap = {
          * Método que genera el mapa de juego
          */
         generateMap() {
-            const map = [
-                ["X", "X", "1", "1", "1", "X", "X", "X", "X", "X", "1", "1", "1", "X", "X"],
-                ["X", "X", "1", "1", "X", "X", "X", "X", "X", "X", "X", "1", "1", "X", "X"],
-                ["X", "X", "1", "X", "X", "X", "X", "1", "X", "X", "X", "X", "1", "X", "X"],
-                ["X", "X", "X", "X", "X", "X", "1", "1", "1", "X", "X", "X", "X", "X", "X"],
-                ["X", "X", "X", "X", "X", "1", "1", "1", "1", "1", "X", "X", "X", "X", "X"]
+            const maps = [
+                [
+                    ["O", "X", "2", "2", "4", "X", "X", "X", "X", "X", "5", "2", "2", "X", "X"],
+                    ["X", "X", "2", "4", "X", "X", "X", "A", "X", "X", "X", "5", "2", "X", "X"],
+                    ["X", "X", "4", "X", "X", "X", "X", "6", "X", "X", "X", "X", "5", "X", "X"],
+                    ["X", "X", "X", "X", "X", "X", "1", "2", "3", "X", "X", "X", "X", "X", "X"],
+                    ["X", "X", "X", "X", "X", "1", "2", "2", "2", "3", "X", "X", "X", "X", "S"]
+                ],
+                [
+                    ["X", "X", "X", "X", "X", "5", "2", "2", "2", "4", "X", "X", "X", "X", "X"],
+                    ["X", "X", "X", "X", "X", "X", "5", "2", "4", "X", "X", "X", "X", "X", "X"],
+                    ["X", "X", "3", "X", "X", "X", "X", "7", "X", "X", "X", "X", "1", "X", "X"],
+                    ["X", "X", "2", "3", "X", "X", "X", "A", "X", "X", "X", "1", "2", "X", "X"],
+                    ["X", "X", "2", "2", "3", "X", "X", "X", "X", "X", "1", "2", "2", "X", "O"]
+                ]
             ];
 
-            this.placeCharacters(map);
-            this.drawMap(map);
-
-            return map;
-        }
-
-        /**
-         * Método que coloca los personajes en el mapa 
-         * en posiciones aleatorias
-         * 
-         * @param {array} map Mapa de juego
-         */
-        placeCharacters(map) {
-            for(let i = 0; i < 2; i++) {
-                let positionX, positionY, character;
-                do {
-                    positionX = Math.floor(Math.random() * map.length);
-                    positionY = Math.floor(Math.random() * map[0].length);    
-                    character = map[positionX][positionY];
-                } while (character != "X");
-                if(i == 0) {
-                    map[positionX][positionY] = "O";
-                } else {
-                    map[positionX][positionY] = "A";
-                }
-            }
+            this.drawMap(maps[0]);
+            return maps;
         }
 
         /**
@@ -62,7 +47,7 @@ nsMap = {
                     table.appendChild(tr);
                 }
             }
-            document.getElementById("title").appendChild(table);
+            document.getElementById("balls").appendChild(table);
         }   
     }
 }
