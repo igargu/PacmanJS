@@ -36,7 +36,6 @@ nsMap = {
         drawMap(map) {
             let table = document.createElement("table");
             table.setAttribute("id", "map");
-            table.setAttribute("id", "map");
             for(let i = 0; i < map.length; i++) {
                 let tr = document.createElement("tr");
                 for(let j = 0; j < map[i].length; j++) {
@@ -48,6 +47,6 @@ nsMap = {
                 }
             }
             document.getElementById("gems").appendChild(table);
-        }   
+        }
     }
 }

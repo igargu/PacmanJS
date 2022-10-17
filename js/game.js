@@ -148,19 +148,23 @@ nsGame = {
             if(position < maxPosition && ( map[newPositionX][newPositionY] == "X" 
                 || map[newPositionX][newPositionY] == "S" || map[newPositionX][newPositionY] == "G" )) {
                 document.getElementById("map").remove();
-                if(map[map.length-1][map[0].length-1] == "O" && character == "O") {
-                    map[positionX][positionY] = "S";
-                } else if(character == "O") {
-                    map[positionX][positionY] = "G";
+                if(character == "O") {
+                    if(map[map.length-1][map[0].length-1] == "O") {
+                        map[positionX][positionY] = "S";
+                    } else {
+                        map[positionX][positionY] = "G";
+                    }
                 } else if(character == "A") {
                     if (map[newPositionX][newPositionY] == "X") {
                         map[positionX][positionY] = "X";
+                    } else if(map[map.length-1][map[0].length-1] == "A") {
+                        map[positionX][positionY] = "S";
                     } else {
                         map[positionX][positionY] = "G";
                     }
                 }
                 map[newPositionX][newPositionY] = character;
-                let balls = "Remaining gems: " + this.countGems(maps);
+                let balls = "Gemas restantes: " + this.countGems(maps);
                 document.getElementById("gems").innerHTML = balls;
                 if (this.countGems(maps) == '0') {
                     this.finishGame("HAS GANADO");
